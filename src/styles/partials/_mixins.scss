@@ -9,13 +9,40 @@
   background-color: $blue-color;
   border: 0;
   color: white;
+  transition: all 0.3s ease;
 
   &:hover {
     background-color: $blue-color-hover;
   }
 }
 
+@mixin light-button {
+  background-color: $background-cta-card;
+  border: 0;
+  color: $blue-color;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background-color: $blue-color;
+    color: white;
+  }
+}
+
 @mixin pill-button {
   border-radius: 30px;
   padding: 12px 23px;
+}
+
+@mixin title-content-button {
+  h1 {
+    font-size: 50px;
+    font-weight: 300;
+  }
+
+  button {
+    @include blue-button;
+    @include pill-button;
+    text-transform: uppercase;
+    width: fit-content;
+  }
 }
