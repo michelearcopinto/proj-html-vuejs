@@ -77,7 +77,9 @@ export default {
         <p>{{ card.content }}</p>
       </div>
     </section>
-    <section></section>
+    <section id="courses-grid">
+      <div></div>
+    </section>
   </main>
 </template>
 
@@ -170,7 +172,7 @@ main {
       display: flex;
       flex-direction: column;
       gap: 25px;
-      transition: transform 0.3s ease;
+      transition: transform 0.4s ease;
 
       &:hover {
         transform: translateY(-10px);
@@ -190,6 +192,9 @@ main {
         color: $light-color;
       }
     }
+  }
+
+  #courses-grid {
   }
 }
 </style>
