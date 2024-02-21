@@ -589,6 +589,7 @@ main {
         @include pill-button;
         @include light-button;
         text-transform: capitalize;
+        font-weight: 700;
       }
     }
 
