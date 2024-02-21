@@ -178,7 +178,7 @@ export const store = reactive({
     },
 
     {
-      imgPath: "./src/assets/img/c_1-material-design.png",
+      imgPath: "./src/assets/img/c_1-music.jpeg",
       title: "How to be a DJ? Make Electronic Music",
       category: "Music",
       average_vote: 5,
@@ -186,7 +186,7 @@ export const store = reactive({
       tag: "Hot",
     },
     {
-      imgPath: "./src/assets/img/c_2-material-design.png",
+      imgPath: "./src/assets/img/c_2-music.jpg",
       title: "Learning Jazz like in San Francisco",
       category: "Music",
       average_vote: 5,
@@ -195,7 +195,7 @@ export const store = reactive({
       tag: "Special",
     },
     {
-      imgPath: "./src/assets/img/c_3-material-design.png",
+      imgPath: "./src/assets/img/c_3-music.png",
       title: "Music Theory basics for beginners",
       category: "Music",
       average_vote: 4,
