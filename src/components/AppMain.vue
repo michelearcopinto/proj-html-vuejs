@@ -600,6 +600,7 @@ main {
       margin-inline: auto;
       display: block;
       margin-top: 50px;
+      font-weight: 700;
     }
   }
 
