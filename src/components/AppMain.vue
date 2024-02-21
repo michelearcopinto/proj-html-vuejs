@@ -3,6 +3,30 @@
 
 export default {
   name: "AppMain",
+  data() {
+    return {
+      cardsArray: [
+        {
+          icon: "fa-solid fa-earth-americas",
+          title: "Worldwide Recognize",
+          content:
+            "Our online course certificates can be used around the world and also in most popular universities and companies.",
+        },
+        {
+          icon: "fa-solid fa-desktop",
+          title: "Mostly Online Learning (sd)",
+          content:
+            "Masterstudy online certificates can be obtained in a range of specialized areas and typically take about a year to complete.",
+        },
+        {
+          icon: "fa-regular fa-calendar-check",
+          title: "Graduate in as little as 1 Year",
+          content:
+            "Online post-graduate certificates are a popular way to develop your professional qualifications of Masterstudy",
+        },
+      ],
+    };
+  },
 };
 </script>
 
@@ -46,6 +70,14 @@ export default {
         />
       </figure>
     </section>
+    <section id="cta-cards">
+      <div v-for="card in cardsArray">
+        <i :class="card.icon"></i>
+        <h3>{{ card.title }}</h3>
+        <p>{{ card.content }}</p>
+      </div>
+    </section>
+    <section></section>
   </main>
 </template>
 
@@ -62,6 +94,7 @@ main {
     display: flex;
     align-items: center;
     gap: 20px;
+    margin-bottom: 60px;
 
     #cta-investing-texts {
       display: flex;
@@ -122,6 +155,39 @@ main {
         top: 80px;
         left: 72px;
         filter: grayscale(100%);
+      }
+    }
+  }
+
+  #cta-cards {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 120px;
+
+    div {
+      background-color: $background-cta-card;
+      padding: 30px;
+      display: flex;
+      flex-direction: column;
+      gap: 25px;
+      transition: transform 0.3s ease;
+
+      &:hover {
+        transform: translateY(-10px);
+      }
+
+      i {
+        font-size: 50px;
+        color: $blue-color;
+      }
+
+      h3 {
+        font-weight: 500;
+      }
+
+      p {
+        font-size: 14px;
+        color: $light-color;
       }
     }
   }
