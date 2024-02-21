@@ -26,6 +26,22 @@ export default {
             "Online post-graduate certificates are a popular way to develop your professional qualifications of Masterstudy",
         },
       ],
+      plansCardsArray: [
+        {
+          imgPath: "./src/assets/img/image_box_1-221x231.png",
+          title: "Become an Instructor",
+          content:
+            "Teach what you love. Masterstudy gives you the tools to create a course.",
+          button: "START TEACHING",
+        },
+        {
+          imgPath: "./src/assets/img/image_box_2-234x231.png",
+          title: "Setup For Business",
+          content:
+            "Get unlimited access to 2,500 of Udemy's top courses for your team.",
+          button: "DOING BUSINESS",
+        },
+      ],
     };
   },
   computed: {
@@ -159,7 +175,7 @@ export default {
           software development
         </button>
       </div>
-      <div id="courses-grid">
+      <div class="courses-grid">
         <div v-for="course in filteredArray" class="course-card">
           <figure>
             <img :src="course.imgPath" alt="" />
@@ -248,6 +264,78 @@ export default {
           <div>
             <input type="text" placeholder="Enter your E-mail" />
             <button>SUBSCRIBE</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="popular-courses">
+      <div class="container">
+        <h1>popular courses</h1>
+        <span>Discover our most popular courses for self learning</span>
+        <div class="courses-grid">
+          <div
+            v-for="course in store.coursesInfos.slice(0, 6)"
+            class="course-card"
+          >
+            <figure>
+              <img :src="course.imgPath" alt="" />
+            </figure>
+            <div class="course-infos">
+              <ul>
+                <li>{{ course.category }} &gt;</li>
+                <li>
+                  <h4>{{ course.title }}</h4>
+                </li>
+              </ul>
+              <hr />
+              <div class="course-extra-infos">
+                <div class="stars-container" v-if="course.average_vote !== 0">
+                  <img
+                    v-for="star in course.average_vote"
+                    src="../assets/img/starfull.svg"
+                    alt="starfull"
+                  />
+                  <img
+                    v-for="emptyStar in calcVote(course.average_vote)"
+                    src="../assets/img/staremptyl.svg"
+                    alt="staremptyl"
+                  />
+                  <span>{{ course.average_vote }}</span>
+                </div>
+                <div class="course-time" v-else>
+                  <span
+                    ><i class="fa-regular fa-clock"></i>
+                    {{ genRandomNum(2, 12) }} hours</span
+                  >
+                </div>
+                <div class="price-container">
+                  <span :class="course.sale ? 'strikethrough-price' : ''">
+                    {{ course.price }}</span
+                  >
+                  <span> {{ course.sale }}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <button><i class="fas fa-chevron-left"></i></button>
+          <button><i class="fas fa-chevron-right"></i></button>
+        </div>
+      </div>
+    </section>
+
+    <section id="plans-cards">
+      <div>
+        <div v-for="card in plansCardsArray">
+          <figure>
+            <img :src="card.imgPath" alt="img" />
+          </figure>
+          <div>
+            <h1>{{ card.title }}</h1>
+            <p>{{ card.content }}</p>
+            <button>{{ card.button }}</button>
           </div>
         </div>
       </div>
@@ -454,69 +542,6 @@ main {
       }
     }
 
-    #courses-grid {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-
-      .course-card {
-        width: calc((100% - 5 * 10px) / 6);
-        border: 1px solid rgba($color: #000000, $alpha: 0.1);
-
-        &:hover {
-          cursor: pointer;
-        }
-
-        &:hover figure {
-          filter: brightness(0.8);
-        }
-
-        .course-infos {
-          padding: 10px;
-
-          ul {
-            li:first-child {
-              color: $light-color;
-              margin-bottom: 5px;
-            }
-          }
-
-          hr {
-            margin-block: 10px;
-            border: 1px solid rgba($color: #000000, $alpha: 0.1);
-          }
-
-          .course-extra-infos {
-            display: flex;
-            justify-content: space-between;
-
-            .stars-container {
-              display: flex;
-              align-items: center;
-
-              span {
-                padding-left: 5px;
-              }
-
-              img {
-                width: 15px;
-              }
-            }
-
-            .price-container {
-              display: flex;
-              flex-direction: column;
-              align-items: end;
-            }
-
-            .course-time {
-              color: $light-color;
-            }
-          }
-        }
-      }
-    }
-
     & > button {
       @include blue-button;
       @include pill-button;
@@ -531,7 +556,7 @@ main {
     background-color: $background-proud-card;
     text-align: center;
     padding-top: 40px;
-    height: 520px;
+    height: 540px;
     position: relative;
     @include title-content-button;
 
@@ -624,6 +649,155 @@ main {
             padding: 5px 13px;
             font-weight: 800;
           }
+        }
+      }
+    }
+  }
+
+  #popular-courses {
+    margin-bottom: 80px;
+    padding-top: 80px;
+    padding-bottom: 50px;
+    background-color: $background-proud-card;
+
+    .container {
+      width: 90%;
+      margin-inline: auto;
+
+      h1 {
+        font-size: 50px;
+        font-weight: 300;
+        text-align: center;
+        text-transform: capitalize;
+        margin-bottom: 10px;
+      }
+
+      & > span {
+        text-align: center;
+        display: block;
+        font-size: 20px;
+        font-weight: 300;
+        margin-bottom: 30px;
+      }
+
+      .course-card {
+        background-color: white;
+      }
+
+      & > div {
+        margin-top: 35px;
+        width: fit-content;
+        margin-inline: auto;
+
+        button {
+          padding: 5px 10px;
+          background-color: white;
+          border: 1px solid rgba($color: #000000, $alpha: 0.2);
+          color: rgba($color: #000000, $alpha: 0.2);
+          transition: all 0.3s ease;
+
+          &:hover {
+            background-color: $grey-color-hover;
+            color: white;
+            cursor: pointer;
+          }
+        }
+      }
+    }
+  }
+
+  #plans-cards {
+    width: 90%;
+    margin-inline: auto;
+
+    & > div {
+      display: flex;
+      gap: 30px;
+
+      & > div {
+        @include title-content-button;
+        display: flex;
+        align-items: center;
+        gap: 30px;
+        padding: 50px 15px;
+        border: 1px solid rgba($color: #000000, $alpha: 0.1);
+
+        div {
+          display: flex;
+          flex-direction: column;
+          gap: 20px;
+
+          h1 {
+            font-size: 35px;
+          }
+
+          button {
+            font-weight: 800;
+          }
+        }
+      }
+    }
+  }
+}
+
+.courses-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+
+  .course-card {
+    width: calc((100% - 5 * 10px) / 6);
+    border: 1px solid rgba($color: #000000, $alpha: 0.1);
+
+    &:hover {
+      cursor: pointer;
+    }
+
+    &:hover figure {
+      filter: brightness(0.8);
+    }
+
+    .course-infos {
+      padding: 10px;
+
+      ul {
+        li:first-child {
+          color: $light-color;
+          margin-bottom: 5px;
+          font-size: 13px;
+        }
+      }
+
+      hr {
+        margin-block: 10px;
+        border: 1px solid rgba($color: #000000, $alpha: 0.1);
+      }
+
+      .course-extra-infos {
+        display: flex;
+        justify-content: space-between;
+
+        .stars-container {
+          display: flex;
+          align-items: center;
+
+          span {
+            padding-left: 5px;
+          }
+
+          img {
+            width: 15px;
+          }
+        }
+
+        .price-container {
+          display: flex;
+          flex-direction: column;
+          align-items: end;
+        }
+
+        .course-time {
+          color: $light-color;
         }
       }
     }
