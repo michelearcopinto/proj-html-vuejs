@@ -6,13 +6,13 @@ export default {
   data() {
     return {
       sectionsListArray: [
-        "courses",
-        "zoom",
-        "pages",
-        "bundles",
-        "course formats",
-        "add course",
-        "demos",
+        { name: "courses", absoluteValue: "", visibility: false },
+        { name: "zoom", absoluteValue: "new", visibility: true },
+        { name: "pages", absoluteValue: "", visibility: false },
+        { name: "bundles", absoluteValue: "", visibility: false },
+        { name: "course formats", absoluteValue: "", visibility: false },
+        { name: "add course", absoluteValue: "new", visibility: true },
+        { name: "demos", absoluteValue: "", visibility: false },
       ],
       socialsListArray: [
         "fab fa-twitter",
@@ -39,9 +39,12 @@ export default {
         </div>
         <div id="upper-nav-right-side">
           <div>
-            <ul>
+            <ul id="list-elements">
               <li v-for="listElement in sectionsListArray">
-                <a href="">{{ listElement }}</a>
+                <a href="">{{ listElement.name }}</a>
+                <div v-show="listElement.visibility">
+                  {{ listElement.absoluteValue }}
+                </div>
               </li>
             </ul>
           </div>
@@ -59,19 +62,21 @@ export default {
         <figure>
           <img src="../assets/img/MasterStudy_logo.svg" alt="logo-header" />
         </figure>
-        <div class="search-container">
+        <div id="search-container">
           <span><i class="fas fa-bars"> category</i></span>
           <div>
             <input type="text" placeholder="Search courses" />
             <button><i class="fas fa-magnifying-glass"></i></button>
           </div>
         </div>
-        <div>
-          <span><i class="fa-solid fa-bullhorn"></i> Become an Instructor</span>
-          <span><i class="fas fa-briefcase"></i> For Enterprise</span>
+        <div id="links-container">
+          <a href=""
+            ><i class="fa-solid fa-bullhorn"></i> Become an Instructor</a
+          >
+          <a href=""><i class="fas fa-briefcase"></i> For Enterprise</a>
         </div>
-        <div>
-          <span><i class="fa-regular fa-user"></i> Log In</span>
+        <div id="account-container">
+          <a href=""><i class="fa-regular fa-user"></i> Log In</a>
           <button>SIGN UP</button>
           <i class="fa-regular fa-bookmark"></i>
         </div>
@@ -85,7 +90,7 @@ export default {
 @use "../styles/partials/mixins" as *;
 
 header {
-  padding-top: 20px;
+  padding-top: 25px;
   nav {
     #upper-nav {
       @include header-width;
@@ -103,6 +108,25 @@ header {
         display: flex;
         gap: 40px;
 
+        #list-elements {
+          gap: 25px;
+
+          li {
+            position: relative;
+
+            div {
+              position: absolute;
+              top: -19px;
+              right: -10px;
+              font-size: 12px;
+              color: white;
+              background-color: $tag-element-color;
+              border-radius: 4px 4px 4px 0px;
+              padding: 2px 4px;
+            }
+          }
+        }
+
         ul {
           display: flex;
           gap: 15px;
@@ -117,15 +141,75 @@ header {
         }
       }
     }
-  }
 
-  hr {
-    margin-block: 20px;
-  }
+    hr {
+      margin-block: 20px;
+    }
 
-  #bottom-nav {
-    @include header-width;
-    display: flex;
+    #bottom-nav {
+      @include header-width;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      #search-container {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        color: $light-color;
+
+        div {
+          display: flex;
+
+          input {
+            background-color: $input-background;
+            border: 0;
+            padding: 8px;
+
+            &::placeholder {
+              color: $light-color;
+            }
+          }
+
+          button {
+            @include blue-button;
+            padding: 5px 13px;
+          }
+        }
+      }
+
+      #links-container {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+
+        a {
+          i {
+            color: $blue-color;
+          }
+        }
+      }
+
+      #account-container {
+        display: flex;
+        align-items: center;
+        gap: 25px;
+
+        a,
+        i {
+          color: $blue-color;
+        }
+
+        button {
+          @include blue-button;
+          @include pill-button;
+        }
+
+        & > i {
+          font-size: 22px;
+        }
+      }
+    }
   }
 }
 </style>

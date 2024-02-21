@@ -4,3 +4,18 @@
   width: 90%;
   margin-inline: auto;
 }
+
+@mixin blue-button {
+  background-color: $blue-color;
+  border: 0;
+  color: white;
+
+  &:hover {
+    background-color: $blue-color-hover;
+  }
+}
+
+@mixin pill-button {
+  border-radius: 30px;
+  padding: 12px 23px;
+}

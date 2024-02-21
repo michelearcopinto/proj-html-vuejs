@@ -25,8 +25,12 @@ li {
 a {
   text-decoration: none;
   color: black;
+}
 
-  &:hover {
-    text-decoration: underline;
-  }
+i:hover {
+  cursor: pointer;
+}
+
+button:hover {
+  cursor: pointer;
 }
