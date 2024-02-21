@@ -103,6 +103,7 @@ export default {
         <p>{{ card.content }}</p>
       </div>
     </section>
+
     <section id="categories-grid" class="main-container">
       <div
         v-for="category in store.categoriesInfos"
@@ -129,6 +130,7 @@ export default {
         </div>
       </div>
     </section>
+
     <section id="more-infos">
       <div class="main-container">
         <div>
@@ -141,6 +143,7 @@ export default {
         </div>
       </div>
     </section>
+
     <section id="recent-courses">
       <h1>recent courses</h1>
       <div id="categories-buttons">
@@ -201,6 +204,7 @@ export default {
       </div>
       <button @click="filterByCategory('All Categories')">show all</button>
     </section>
+
     <section id="proud-infos">
       <div>
         <h1>We are Proud</h1>
@@ -228,6 +232,25 @@ export default {
         </div>
       </div>
       <img src="../assets/img/we_proud.png" alt="" />
+    </section>
+    <section id="newsletter">
+      <div class="main-container">
+        <div id="newsletter-info">
+          <h3>Subscribe our newsletter</h3>
+          <p>
+            There are many variations of passages of Lorem Ipsum available, but
+            the majority have suffered alteration in some form, by injected
+            humour, or randomised words
+          </p>
+        </div>
+        <div class="search-container">
+          <span>YOUR E-MAIL ADDRESS</span>
+          <div>
+            <input type="text" placeholder="Enter your E-mail" />
+            <button>SUBSCRIBE</button>
+          </div>
+        </div>
+      </div>
     </section>
   </main>
 </template>
@@ -506,12 +529,15 @@ main {
 
   #proud-infos {
     background-color: $background-proud-card;
-    margin-bottom: 120px;
     text-align: center;
     padding-top: 40px;
     height: 520px;
     position: relative;
     @include title-content-button;
+
+    p {
+      margin-top: 20px;
+    }
 
     span,
     p {
@@ -557,6 +583,49 @@ main {
     img {
       position: absolute;
       bottom: 0;
+    }
+  }
+
+  #newsletter {
+    background-color: $background-newsletter-card;
+    padding-block: 50px;
+    color: white;
+
+    .main-container {
+      width: 70%;
+      display: flex;
+      gap: 30px;
+
+      #newsletter-info {
+        width: 60%;
+      }
+
+      .search-container {
+        width: 40%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+
+        div {
+          display: flex;
+
+          input {
+            background-color: $input-background;
+            border: 0;
+            padding: 8px;
+
+            &::placeholder {
+              color: $light-color;
+            }
+          }
+
+          button {
+            @include blue-button;
+            padding: 5px 13px;
+            font-weight: 800;
+          }
+        }
+      }
     }
   }
 }

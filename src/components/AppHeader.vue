@@ -62,7 +62,7 @@ export default {
         <figure>
           <img src="../assets/img/MasterStudy_logo.svg" alt="logo-header" />
         </figure>
-        <div id="search-container">
+        <div class="search-container">
           <span><i class="fas fa-bars"> category</i></span>
           <div>
             <input type="text" placeholder="Search courses" />
@@ -152,7 +152,19 @@ header {
       justify-content: space-between;
       align-items: center;
 
-      #search-container {
+      #links-container {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+
+        a {
+          i {
+            color: $blue-color;
+          }
+        }
+      }
+
+      .search-container {
         display: flex;
         align-items: center;
         gap: 10px;
@@ -174,18 +186,7 @@ header {
           button {
             @include blue-button;
             padding: 5px 13px;
-          }
-        }
-      }
-
-      #links-container {
-        display: flex;
-        align-items: center;
-        gap: 20px;
-
-        a {
-          i {
-            color: $blue-color;
+            font-weight: 800;
           }
         }
       }
