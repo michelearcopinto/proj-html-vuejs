@@ -1,10 +1,11 @@
 <script>
-// import
+import { store } from "../store";
 
 export default {
   name: "AppMain",
   data() {
     return {
+      store,
       cardsArray: [
         {
           icon: "fa-solid fa-earth-americas",
@@ -78,7 +79,30 @@ export default {
       </div>
     </section>
     <section id="courses-grid">
-      <div></div>
+      <div
+        v-for="course in store.coursesGridArray"
+        class="category-card"
+        :class="course.doubleCourse ? 'double-card' : ''"
+      >
+        <div>
+          <figure>
+            <img :src="course.imgPath" alt="" />
+          </figure>
+          <div class="category-infos">
+            <span>{{ course.nameCategory }}</span>
+            <span> {{ course.courses.length }} Courses</span>
+          </div>
+        </div>
+        <div>
+          <figure v-show="course.doubleCourse">
+            <img :src="course.imgPath2" alt="" />
+          </figure>
+          <div v-show="course.doubleCourse" class="category-infos">
+            <span>{{ course.nameCategory2 }}</span>
+            <span> {{ course.courses2.length }} Courses</span>
+          </div>
+        </div>
+      </div>
     </section>
   </main>
 </template>
@@ -86,6 +110,12 @@ export default {
 <style lang="scss" scoped>
 @use "../styles/partials/variables" as *;
 @use "../styles/partials/mixins" as *;
+
+.double-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
 
 main {
   width: 60%;
@@ -163,10 +193,11 @@ main {
 
   #cta-cards {
     display: flex;
-    gap: 10px;
-    margin-bottom: 120px;
+    gap: 20px;
+    margin-bottom: 80px;
 
     div {
+      width: calc(100% / 3);
       background-color: $background-cta-card;
       padding: 30px;
       display: flex;
@@ -195,6 +226,40 @@ main {
   }
 
   #courses-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+
+    .category-card {
+      width: calc((100% / 3) - 20px + (20px / 3));
+
+      &:hover {
+        cursor: pointer;
+      }
+
+      figure {
+        overflow: hidden;
+
+        img {
+          transition: transform 0.4s ease;
+        }
+
+        &:hover img {
+          transform: scale(1.05);
+        }
+      }
+
+      .category-infos {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        padding-top: 15px;
+      }
+    }
+
+    .category-card:first-child {
+      width: calc((100% / 3) * 2 - 20px + (20px / 3 * 2));
+    }
   }
 }
 </style>
