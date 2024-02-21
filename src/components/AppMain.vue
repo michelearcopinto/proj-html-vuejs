@@ -6,6 +6,7 @@ export default {
   data() {
     return {
       store,
+      counterImg: 0,
       cardsArray: [
         {
           icon: "fa-solid fa-earth-americas",
@@ -42,7 +43,42 @@ export default {
           button: "DOING BUSINESS",
         },
       ],
+      testimonialsArray: [
+        {
+          imgPath:
+            "background-image: url('./src/assets/img/brooke-cagle-224821-unsplash-1-1920x700.jpg')",
+          name: "Martin Sub",
+          occupation: "General Developer, Stylemix Themes",
+          title: "Come as you are",
+          content:
+            "MasterStudy used is an excellent workshop whether you come as a counselor, advisor, administrator, or faculty member. I am going home empowered. I am looking forward to attending the On Course MasterStudy and the MasterStudy National Conference next year and facilitating the use of this excellent retention/student success course at my college.",
+        },
+        {
+          imgPath:
+            "background-image: url('./src/assets/img/testimonial-1-1917x640.jpg')",
+          name: "Linda Green",
+          occupation: "Product Manager, Apple Inc",
+          title: "Investing for Your Future",
+          content:
+            "It is no exaggeration to say this MasterStudy experience was transformative–both professionally and personally. This workshop will long remain a high point of my life. Thanks again…. I am feeling energized and eager to start teaching my class next week. I can’t wait to use all of my new teaching tools. I will absolutely recommend this workshop to other educators!",
+        },
+        {
+          imgPath:
+            "background-image: url('./src/assets/img/micah-296507-unsplash-1-copy-1-1920x700.jpg')",
+          name: "Mayn Red",
+          occupation: "Xatashi, Froust Inc",
+          title: "Paints of the Future",
+          content:
+            "The response to your MasterStudy has been really overwhelming! Those who participated in the workshop are spreading the word here on campus and the “buzz” is on. The VP of Instruction wants you to come back! Her goal is to have more faculty trained. She also wants to attend a workshop herself. Our President told me Masterstudy needs to be the cornerstone of our success program.”",
+        },
+      ],
     };
+  },
+  created() {
+    setInterval(() => {
+      this.counterImg === 2 ? (this.counterImg = 0) : this.counterImg++;
+      console.log(this.counterImg);
+    }, 3000);
   },
   computed: {
     filteredArray() {
@@ -337,6 +373,20 @@ export default {
             <p>{{ card.content }}</p>
             <button>{{ card.button }}</button>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="testimonials" :style="testimonialsArray[counterImg].imgPath">
+      <div id="testimonial-box">
+        <i class="fas fa-caret-right"></i>
+        <h1>{{ testimonialsArray[counterImg].title }}</h1>
+        <p>{{ testimonialsArray[counterImg].content }}</p>
+        <div>
+          <span
+            ><strong>{{ testimonialsArray[counterImg].name }}</strong></span
+          >
+          <span>{{ testimonialsArray[counterImg].occupation }}</span>
         </div>
       </div>
     </section>
@@ -709,6 +759,7 @@ main {
   #plans-cards {
     width: 90%;
     margin-inline: auto;
+    margin-bottom: 80px;
 
     & > div {
       display: flex;
@@ -734,6 +785,55 @@ main {
           button {
             font-weight: 800;
           }
+        }
+      }
+    }
+  }
+
+  #testimonials {
+    height: 700px;
+    background-size: cover;
+    background-position: 55% 50%;
+    background-repeat: no-repeat;
+    transition: all 1s ease-in-out;
+    position: relative;
+
+    #testimonial-box {
+      position: relative;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-90%, -50%);
+      background-color: white;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      width: 50%;
+      height: 550px;
+      padding: 60px 80px;
+
+      i {
+        position: absolute;
+        font-size: 150px;
+        right: -35px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: white;
+      }
+
+      h1 {
+        font-size: 50px;
+        font-weight: 300;
+      }
+
+      p {
+        line-height: 30px;
+      }
+
+      div {
+        span:first-child {
+          display: block;
+          margin-bottom: 5px;
         }
       }
     }
