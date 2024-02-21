@@ -78,7 +78,7 @@ export default {
     setInterval(() => {
       this.counterImg === 2 ? (this.counterImg = 0) : this.counterImg++;
       console.log(this.counterImg);
-    }, 3000);
+    }, 9000);
   },
   computed: {
     filteredArray() {
@@ -784,6 +784,10 @@ main {
 
           button {
             font-weight: 800;
+
+            &:hover {
+              background-color: $green-color-hover;
+            }
           }
         }
       }
@@ -811,6 +815,7 @@ main {
       width: 50%;
       height: 550px;
       padding: 60px 80px;
+      border-radius: 10px;
 
       i {
         position: absolute;
