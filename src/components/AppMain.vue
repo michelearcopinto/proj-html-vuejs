@@ -72,6 +72,15 @@ export default {
             "The response to your MasterStudy has been really overwhelming! Those who participated in the workshop are spreading the word here on campus and the “buzz” is on. The VP of Instruction wants you to come back! Her goal is to have more faculty trained. She also wants to attend a workshop herself. Our President told me Masterstudy needs to be the cornerstone of our success program.”",
         },
       ],
+      filtersArray: [
+        "",
+        "Art",
+        "Exercise",
+        "Material Design",
+        "Music",
+        "Photography",
+        "Software Development",
+      ],
     };
   },
   created() {
@@ -171,11 +180,11 @@ export default {
             <span> {{ category.courses }} Courses</span>
           </div>
         </div>
-        <div>
-          <figure v-show="category.doubleCourse">
+        <div v-show="category.doubleCourse">
+          <figure>
             <img :src="category.imgPath2" alt="" />
           </figure>
-          <div v-show="category.doubleCourse" class="category-infos">
+          <div class="category-infos">
             <span>{{ category.title2 }}</span>
             <span> {{ category.courses2 }} Courses</span>
           </div>
@@ -199,16 +208,16 @@ export default {
     <section id="recent-courses">
       <h1>recent courses</h1>
       <div id="categories-buttons">
-        <button @click="filterByCategory('')">all categories</button>
-        <button @click="filterByCategory('Art')">art</button>
-        <button @click="filterByCategory('Exercise')">exercise</button>
-        <button @click="filterByCategory('Material Design')">
-          material design
-        </button>
-        <button @click="filterByCategory('Music')">music</button>
-        <button @click="filterByCategory('Photography')">photography</button>
-        <button @click="filterByCategory('Software Development')">
-          software development
+        <button
+          v-for="filter in filtersArray"
+          @click="filterByCategory(filter)"
+          :class="
+            store.selectedCategory === filter
+              ? 'active-filter'
+              : 'normal-button'
+          "
+        >
+          {{ filter === "" ? "All Categories" : filter }}
         </button>
       </div>
       <div class="courses-grid">
@@ -585,9 +594,16 @@ main {
       justify-content: center;
       gap: 30px;
 
-      button {
+      .normal-button {
         @include pill-button;
         @include light-button;
+        text-transform: capitalize;
+        font-weight: 700;
+      }
+
+      .active-filter {
+        @include pill-button;
+        @include blue-button;
         text-transform: capitalize;
         font-weight: 700;
       }
